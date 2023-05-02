@@ -19,7 +19,7 @@ const authSchema = mongoose.Schema(
       default: "user",
     },
   },
-  { versionKey: false, timestamp: true }
+  { versionKey: false, timestamps: true }
 );
 
 export default mongoose.model("auth", authSchema);
