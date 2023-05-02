@@ -31,3 +31,37 @@ export const getProducts = async (req, res, next) => {
     next(error);
   }
 };
+
+//? get single product
+export const getSingleProduct = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const product = await Product.findOne({ _id: id });
+
+    res.status(200).json({
+      success: true,
+      message: "Single product detail",
+      data: product,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+//? get product by category
+export const getProductByCategory = async (req, res, next) => {
+  try {
+    const { category } = req.params;
+
+    const products = await Product.find({ category: category });
+
+    res.status(200).json({
+      success: true,
+      message: `Product for ${category} category`,
+      data: products,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

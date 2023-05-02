@@ -9,4 +9,13 @@ router.post("/", productController.createProduct);
 //? get all products
 router.get("/", productController.getProducts);
 
+//? get single product
+router.get("/:id", productController.getSingleProduct);
+
+//? get product by category
+router.get(
+  "/category/:category",
+  productController.getProductByCategory
+);
+
 export default router;
