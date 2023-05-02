@@ -9,7 +9,7 @@ export const register = async (req, res, next) => {
 
     const checkExist = await Auth.findOne({ email: data.email });
     if (!checkExist) {
-      const hashedPassword = await bcrypt.hash(data.password, 10);
+      const hashedPassword = await bcrypt.hash(data?.password, 10);
       const userData = {
         ...data,
         password: hashedPassword,
@@ -82,9 +82,14 @@ export const login = async (req, res, next) => {
             token,
           },
         });
+      } else {
+        res.status(500).json({
+          success: false,
+          message: "Password is incorrect!",
+        });
       }
     } else {
-      res.status(200).json({
+      res.status(500).json({
         success: false,
         message: "No user found!",
       });
