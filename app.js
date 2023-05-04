@@ -8,6 +8,8 @@ import errorHandler from "./src/middlewares/error.handler.js";
 import defaultRoute from "./src/routes/default.route.js";
 import productRoute from "./src/routes/product.route.js";
 import authRoute from "./src/routes/auth.route.js";
+import orderRoute from "./src/routes/order.route.js";
+import paymentRoute from "./src/routes/payment.route.js";
 
 //? app configuration
 const app = express();
@@ -32,6 +34,8 @@ mongoose
 app.use("/api/v1", defaultRoute);
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/products", productRoute);
+app.use("/api/v1/orders", orderRoute);
+app.use("/api/v1/payment", paymentRoute);
 
 //? handle undefined routes
 app.all("*", (req, res) => {
