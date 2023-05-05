@@ -16,3 +16,20 @@ export const placeOrder = async (req, res, next) => {
     next(error);
   }
 };
+
+//? get all order by user email
+export const allOrders = async (req, res, next) => {
+  try {
+    const { email } = req.params;
+
+    const data = await Order.find({ email: email });
+
+    res.status(200).json({
+      success: true,
+      messages: "All orders",
+      data: data,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
