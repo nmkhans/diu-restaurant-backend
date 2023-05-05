@@ -65,3 +65,41 @@ export const getProductByCategory = async (req, res, next) => {
     next(error);
   }
 };
+
+export const updateProduct = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const data = req.body;
+    console.log(id);
+
+    const updatedDoc = {
+      $set: data,
+    };
+
+    const result = await Product.updateOne({ _id: id }, updatedDoc);
+
+    res.status(200).json({
+      success: true,
+      message: "Product updated",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteProduct = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await Product.deleteOne({ _id: id });
+
+    res.status(200).json({
+      success: true,
+      message: "Product deleted.",
+      data: result
+    })
+  } catch (error) {
+    next(error);
+  }
+};

@@ -18,4 +18,10 @@ router.get(
   productController.getProductByCategory
 );
 
+//? update a product
+router.patch("/:id", productController.updateProduct);
+
+//? delete a product
+router.delete("/:id", productController.deleteProduct);
+
 export default router;

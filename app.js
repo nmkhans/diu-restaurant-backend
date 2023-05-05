@@ -10,6 +10,7 @@ import productRoute from "./src/routes/product.route.js";
 import authRoute from "./src/routes/auth.route.js";
 import orderRoute from "./src/routes/order.route.js";
 import paymentRoute from "./src/routes/payment.route.js";
+import statusRoute from "./src/routes/status.route.js";
 
 //? app configuration
 const app = express();
@@ -36,6 +37,7 @@ app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/products", productRoute);
 app.use("/api/v1/orders", orderRoute);
 app.use("/api/v1/payment", paymentRoute);
+app.use("/api/v1/status", statusRoute);
 
 //? handle undefined routes
 app.all("*", (req, res) => {
