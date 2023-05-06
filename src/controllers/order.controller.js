@@ -18,7 +18,7 @@ export const placeOrder = async (req, res, next) => {
 };
 
 //? get all order by user email
-export const allOrders = async (req, res, next) => {
+export const allOrdersByEmail = async (req, res, next) => {
   try {
     const { email } = req.params;
 
@@ -28,6 +28,60 @@ export const allOrders = async (req, res, next) => {
       success: true,
       messages: "All orders",
       data: data,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+//? get all order list
+export const allOrder = async (req, res, next) => {
+  try {
+    const result = await Order.find({});
+
+    res.status(200).json({
+      success: true,
+      message: "All Order Data",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+//? get single order
+export const singleOrder = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+
+    const result = await Order.findOne({ _id: id });
+
+    res.status(200).json({
+      success: true,
+      message: "Order detail",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+//? update order status
+export const updateOrderStatus = async (req, res, next) => {
+  try {
+    const { id, status } = req.query;
+    console.log(status);
+
+    const result = await Order.updateOne(
+      { _id: id },
+      { $set: { status: status } }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "status updated",
+      data: result,
     });
   } catch (error) {
     next(error);
