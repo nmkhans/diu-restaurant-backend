@@ -14,14 +14,6 @@ const orderSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    city: {
-      type: String,
-      required: true,
-    },
-    address: {
-      type: String,
-      required: true,
-    },
     products: {
       type: Array,
       required: true,

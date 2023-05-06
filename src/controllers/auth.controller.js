@@ -98,3 +98,41 @@ export const login = async (req, res, next) => {
     next(error);
   }
 };
+
+//? get all users
+export const getAllUser = async (req, res, next) => {
+  try {
+    const result = await Auth.find({});
+
+    res.status(200).json({
+      success: true,
+      message: "All user data",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+//? promote user
+export const promoteUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await Auth.updateOne(
+      { _id: id },
+      {
+        $set: {
+          role: "admin",
+        },
+      }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "User updated."
+    })
+  } catch (error) {
+    next(error);
+  }
+};
