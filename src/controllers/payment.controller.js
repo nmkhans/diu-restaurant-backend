@@ -28,6 +28,7 @@ const makeTransactionID = (length) => {
 export const makePayment = async (req, res, next) => {
   try {
     const data = req.body;
+    console.log(data);
 
     const transactionId = makeTransactionID(20);
 
@@ -45,11 +46,12 @@ export const makePayment = async (req, res, next) => {
       shipping_method: "NO",
       tran_id: transactionId,
       success_url: `http://localhost:3000/payment-success/${transactionId}`,
-      cancel_url: `http://localhost:3000/user/dashboard/orders`,
+      cancel_url: `http://localhost:3000/${data?.role}/dashboard/orders`,
     });
 
     transactionResponse.transactionId = transactionId;
     transactionResponse.orderId = data._id;
+    transactionResponse.userRole = data.role;
 
     res.json(transactionResponse);
   } catch (error) {
@@ -66,7 +68,6 @@ export const verifyPayment = async (req, res, next) => {
 
     const { val_id, status } =
       transaction_status_response?.element[0];
-
 
     if (
       (status === "VALID" || status === "VALIDATED") &&

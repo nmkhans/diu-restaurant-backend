@@ -14,6 +14,10 @@ const orderSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    role: {
+      type: String,
+      required: true,
+    },
     products: {
       type: Array,
       required: true,
