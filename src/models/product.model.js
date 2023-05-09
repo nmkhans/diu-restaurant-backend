@@ -22,12 +22,16 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    cafeteria: {
+      type: String,
+      required: true,
+    },
     stock: {
       type: Number,
       required: true,
     },
   },
-  { versionKey: false, timestamp: true }
+  { versionKey: false, timestamps: true }
 );
 
 export default mongoose.model("product", productSchema);

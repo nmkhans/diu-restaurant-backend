@@ -49,6 +49,23 @@ export const getSingleProduct = async (req, res, next) => {
   }
 };
 
+//? get product by cafeteria
+export const getProductByCafe = async (req, res, next) => {
+  try {
+    const { name } = req.params;
+
+    const products = await Product.find({ cafeteria: name });
+
+    res.status(200).json({
+      success: true,
+      message: "Product data for cafe",
+      data: products,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 //? get product by category
 export const getProductByCategory = async (req, res, next) => {
   try {
@@ -66,6 +83,7 @@ export const getProductByCategory = async (req, res, next) => {
   }
 };
 
+//? update a product
 export const updateProduct = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -88,6 +106,7 @@ export const updateProduct = async (req, res, next) => {
   }
 };
 
+//? delete a product
 export const deleteProduct = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -97,8 +116,8 @@ export const deleteProduct = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: "Product deleted.",
-      data: result
-    })
+      data: result,
+    });
   } catch (error) {
     next(error);
   }

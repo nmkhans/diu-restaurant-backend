@@ -12,7 +12,22 @@ router.post("/login", authController.login);
 //? get all user
 router.get("/users/all", authController.getAllUser);
 
-//? promote user
-router.patch("/user/promote/:id", authController.promoteUser);
+//? promote user to admin
+router.patch(
+  "/user/promote-to-admin/:id",
+  authController.promoteUserToAdmin
+);
+
+//? promote a user to teacher
+router.patch(
+  "/user/promote-to-teacher/:id",
+  authController.promoteToTeacher
+);
+
+//? promote user to manager
+router.patch(
+  "/user/promote-to-manager/:id",
+  authController.promoteToManager
+);
 
 export default router;

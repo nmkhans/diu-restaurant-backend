@@ -12,6 +12,9 @@ router.get("/", productController.getProducts);
 //? get single product
 router.get("/:id", productController.getSingleProduct);
 
+//? get product by cafe
+router.get("/cafe/:name", productController.getProductByCafe);
+
 //? get product by category
 router.get(
   "/category/:category",

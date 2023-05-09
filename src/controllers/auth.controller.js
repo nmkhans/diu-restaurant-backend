@@ -114,8 +114,8 @@ export const getAllUser = async (req, res, next) => {
   }
 };
 
-//? promote user
-export const promoteUser = async (req, res, next) => {
+//? promote to admin
+export const promoteUserToAdmin = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -130,8 +130,60 @@ export const promoteUser = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "User updated."
-    })
+      message: "User updated.",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+//? promote to teacher
+export const promoteToTeacher = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await Auth.updateOne(
+      { _id: id },
+      {
+        $set: {
+          role: "teacher",
+        },
+      }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "User updated.",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+//? promote to manager
+export const promoteToManager = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { cafeteria } = req.body;
+
+    const result = await Auth.updateOne(
+      { _id: id },
+      {
+        $set: {
+          role: "manager",
+          manager: true,
+          cafeteria: cafeteria,
+        },
+      }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "User updated.",
+      data: result,
+    });
   } catch (error) {
     next(error);
   }

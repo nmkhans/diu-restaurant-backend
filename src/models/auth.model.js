@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const authSchema = mongoose.Schema(
   {
@@ -21,6 +21,14 @@ const authSchema = mongoose.Schema(
     role: {
       type: String,
       default: "user",
+    },
+    cafeteria: {
+      type: String,
+      default: null,
+    },
+    manager: {
+      type: Boolean,
+      default: false,
     },
   },
   { versionKey: false, timestamps: true }

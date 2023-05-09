@@ -1,4 +1,5 @@
 import Order from "../models/order.model.js";
+import Product from "../models/product.model.js";
 
 //? place an order
 export const placeOrder = async (req, res, next) => {
@@ -6,6 +7,22 @@ export const placeOrder = async (req, res, next) => {
     const data = req.body;
 
     const orderData = await Order.create(data);
+
+    const orderedProductList = orderData?.products;
+    orderedProductList.forEach(async (product) => {
+      const orderedProduct = await Product.findOne({
+        _id: product._id,
+      });
+      const orderedQuantity = product.quantity;
+      const productPrevQuantity = orderedProduct.stock;
+      const newStock = productPrevQuantity - orderedQuantity;
+
+      await Product.updateOne(
+        { _id: product._id },
+        { $set: { stock: newStock } }
+      );
+    });
+
 
     res.status(201).json({
       success: true,
