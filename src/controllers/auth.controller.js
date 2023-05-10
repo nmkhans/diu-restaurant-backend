@@ -188,3 +188,44 @@ export const promoteToManager = async (req, res, next) => {
     next(error);
   }
 };
+
+//? get profile info
+export const getProfileInfo = async (req, res, next) => {
+  try {
+    const { email } = req.params;
+
+    const result = await Auth.findOne({ email: email });
+
+    res.status(200).json({
+      success: true,
+      message: "Profile data",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+//? update profile
+
+export const updateProfile = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const data = req.body;
+
+    const updatedDoc = {
+      $set: data,
+    };
+
+    const result = await Auth.updateOne({ _id: id }, updatedDoc);
+    console.log(result);
+
+    res.status(200).json({
+      success: true,
+      message: "Updated",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

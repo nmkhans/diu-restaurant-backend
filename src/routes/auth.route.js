@@ -30,4 +30,10 @@ router.patch(
   authController.promoteToManager
 );
 
+//? get profile info
+router.get("/get-profile/:email", authController.getProfileInfo);
+
+//? update profile
+router.patch("/update-profile/:id", authController.updateProfile);
+
 export default router;
