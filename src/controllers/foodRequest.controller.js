@@ -49,7 +49,6 @@ export const declineRequest = async (req, res, next) => {
       message: "Deleted",
       data: result,
     });
-    
   } catch (error) {
     next(error);
   }
@@ -78,6 +77,22 @@ export const getAllRequestedFood = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: "All requested food",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getRequestedFoodByCafe = async (req, res, next) => {
+  try {
+    const { name } = req.params;
+
+    const result = await Request.find({ cafeteria: name });
+
+    res.status(200).json({
+      success: true,
+      message: "Requested food for cafe",
       data: result,
     });
   } catch (error) {

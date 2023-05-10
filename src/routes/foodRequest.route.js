@@ -18,6 +18,9 @@ router.get(
 //? get all requested Food
 router.get("/all", requestController.getAllRequestedFood);
 
+//? get requested food for user
+router.get("/cafe/:name", requestController.getRequestedFoodByCafe);
+
 //? decline request
 router.delete("/:id", requestController.declineRequest);
 

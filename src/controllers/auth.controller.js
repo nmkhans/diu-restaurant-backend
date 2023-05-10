@@ -218,7 +218,6 @@ export const updateProfile = async (req, res, next) => {
     };
 
     const result = await Auth.updateOne({ _id: id }, updatedDoc);
-    console.log(result);
 
     res.status(200).json({
       success: true,
