@@ -34,7 +34,25 @@ export const approveRequest = async (req, res, next) => {
       message: "Request approved",
       data: result,
     });
-    
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const declineRequest = async (req, res, next) => {};
+
+export const getRequestedFoodListForUser = async (req, res, next) => {
+  try {
+    const { email } = req.params;
+
+    const result = await Request.find({ email: email });
+
+    res.status(200).json({
+      success: true,
+      message: "Food list",
+      data: result,
+    });
+
   } catch (error) {
     next(error);
   }
