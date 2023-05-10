@@ -7,12 +7,18 @@ const router = express.Router();
 router.post("/", requestController.placeRequest);
 
 //? approve an request
-router.patch("/:id", requestController.approveRequest);
+router.patch("/", requestController.approveRequest);
 
 //? get request list for user
 router.get(
   "/all/:email",
   requestController.getRequestedFoodListForUser
 );
+
+//? get all requested Food
+router.get("/all", requestController.getAllRequestedFood);
+
+//? decline request
+router.delete("/:id", requestController.declineRequest);
 
 export default router;
