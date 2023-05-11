@@ -45,8 +45,8 @@ export const makePayment = async (req, res, next) => {
       cus_phone: data.phone,
       shipping_method: "NO",
       tran_id: transactionId,
-      success_url: `http://localhost:3000/payment-success/${transactionId}`,
-      cancel_url: `http://localhost:3000/${data?.role}/dashboard/orders`,
+      success_url: `https://diu-restaurant.netlify.app/payment-success/${transactionId}`,
+      cancel_url: `https://diu-restaurant.netlify.app/${data?.role}/dashboard/orders`,
     });
 
     transactionResponse.transactionId = transactionId;
