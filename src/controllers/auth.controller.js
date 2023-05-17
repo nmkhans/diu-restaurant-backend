@@ -228,3 +228,20 @@ export const updateProfile = async (req, res, next) => {
     next(error);
   }
 };
+
+//? delete user
+export const deleteUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await Auth.deleteOne({ _id: id });
+
+    res.status(200).json({
+      success: true,
+      message: "User deleted",
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

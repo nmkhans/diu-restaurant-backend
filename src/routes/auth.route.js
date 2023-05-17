@@ -36,4 +36,7 @@ router.get("/get-profile/:email", authController.getProfileInfo);
 //? update profile
 router.patch("/update-profile/:id", authController.updateProfile);
 
+//? user user
+router.delete("/delete-user/:id", authController.deleteUser);
+
 export default router;
