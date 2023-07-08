@@ -1,5 +1,6 @@
 import Order from "../models/order.model.js";
 import Product from "../models/product.model.js";
+import Statistic from "../models/statistic.model.js";
 
 //? place an order
 export const placeOrder = async (req, res, next) => {
@@ -21,8 +22,13 @@ export const placeOrder = async (req, res, next) => {
         { _id: product._id },
         { $set: { stock: newStock } }
       );
-    });
 
+      await Statistic.create({
+        cafeteria: product.cafeteria,
+        productQuantity: product.quantity,
+        amount: product.price * product.quantity,
+      });
+    });
 
     res.status(201).json({
       success: true,
@@ -54,7 +60,9 @@ export const allOrdersByEmail = async (req, res, next) => {
 //? get all order list
 export const allOrder = async (req, res, next) => {
   try {
-    const result = await Order.find({});
+    const { cafeteria } = req.query;
+
+    const result = await Order.find({ cafeteria: cafeteria });
 
     res.status(200).json({
       success: true,
@@ -88,7 +96,6 @@ export const singleOrder = async (req, res, next) => {
 export const updateOrderStatus = async (req, res, next) => {
   try {
     const { id, status } = req.query;
-    console.log(status);
 
     const result = await Order.updateOne(
       { _id: id },

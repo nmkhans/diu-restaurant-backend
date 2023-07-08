@@ -12,6 +12,8 @@ import orderRoute from "./src/routes/order.route.js";
 import paymentRoute from "./src/routes/payment.route.js";
 import statusRoute from "./src/routes/status.route.js";
 import requestRoute from "./src/routes/foodRequest.route.js";
+import contactRoute from "./src/routes/contact.route.js";
+import statisticRoute from "./src/routes/statistic.route.js";
 
 //? app configuration
 const app = express();
@@ -40,6 +42,8 @@ app.use("/api/v1/orders", orderRoute);
 app.use("/api/v1/payment", paymentRoute);
 app.use("/api/v1/status", statusRoute);
 app.use("/api/v1/food-request", requestRoute);
+app.use("/api/v1/contact", contactRoute);
+app.use("/api/v1/statistic", statisticRoute);
 
 //? handle undefined routes
 app.all("*", (req, res) => {

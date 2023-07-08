@@ -28,7 +28,6 @@ const makeTransactionID = (length) => {
 export const makePayment = async (req, res, next) => {
   try {
     const data = req.body;
-    console.log(data);
 
     const transactionId = makeTransactionID(20);
 
@@ -93,6 +92,34 @@ export const verifyPayment = async (req, res, next) => {
         data: resData,
       });
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const cashPayment = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const updatedDoc = {
+      $set: {
+        transactionId: "COD",
+        paid: true,
+        status: "confirmed",
+      },
+    };
+
+    const resData = await Order.updateOne(
+      { _id: id },
+      updatedDoc,
+      { upsert: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Payment successfull.",
+      data: resData,
+    });
   } catch (error) {
     next(error);
   }

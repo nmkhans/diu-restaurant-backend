@@ -26,6 +26,10 @@ const orderSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    cafeteria: {
+      type: Array,
+      required: true,
+    },
     paid: {
       type: Boolean,
       default: false,
